@@ -7,6 +7,8 @@ EXTRA_DIR ?= /lib/modules/$(KVER)/updates
 
 default: build
 
+all: mknod
+
 clean: unload uninstall
 
 build:
@@ -17,6 +19,9 @@ install: build
 
 load: install
 	modprobe $(TARGET_MODULE)
+
+mknod: load
+	mknod /dev/scream c 248 0
 
 unload:
 	modprobe -r $(TARGET_MODULE)
